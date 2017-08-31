@@ -40,7 +40,7 @@ void drawRectangle(uint8_t c1, uint8_t r1, uint8_t c2, uint8_t r2, uint16_t line
 void drawPixel(uint8_t c, uint8_t r, uint16_t color);
 void drawChar(uint8_t c, uint8_t r, uint16_t color, char character);
 void printString(uint8_t c, uint8_t r, uint16_t color, char * str);
-void OLEDrgb_Clear();
+void OLEDrgb_Clear(uint8_t c1, uint8_t r1, uint8_t c2, uint8_t r2);
 void getCDCvalues(uint16_t * result);
 void sendDouble(uint8_t command, uint8_t data);
 void sendSingle(uint8_t single);
@@ -118,7 +118,7 @@ int main() {
 		exit(EXIT_FAILURE);
 	}
 
-	OLEDrgb_Clear();
+	OLEDrgb_Clear(0, 0, OLEDRGB_WIDTH - 1, OLEDRGB_HEIGHT - 1);
 	// printString(16, 8, 0xFF00, "Danica");
 	// printString(16, 16, 0x0FF0, "Morovic");
 	// printString(16, 24, 0x00FF, "Doesn't");
@@ -138,7 +138,7 @@ int main() {
 		}
 	}
 	
-	OLEDrgb_Clear();
+	OLEDrgb_Clear(0, 0, OLEDRGB_WIDTH - 1, OLEDRGB_HEIGHT - 1);
     ArtySpiCloseMaster(SPI_CHANNEL);
 	ArtyI2CCloseMaster(I2C_CHANNEL);
 	ArtyDeInit();
@@ -271,13 +271,13 @@ void printString(uint8_t c, uint8_t r, uint16_t color, char * str) {
 	}
 }
 
-void OLEDrgb_Clear() {
+void OLEDrgb_Clear(uint8_t c1, uint8_t r1, uint8_t c2, uint8_t r2) {
 	uint8_t cmds[5];
 	cmds[0] = CMD_CLEAR;
-	cmds[1] = 0x00;
-	cmds[2] = 0x00;
-	cmds[3] = OLEDRGB_WIDTH - 1;
-	cmds[4] = OLEDRGB_HEIGHT - 1;
+	cmds[1] = c1;
+	cmds[2] = r1;
+	cmds[3] = c2;
+	cmds[4] = r2;
 	ArtySpiTransfer(SPI_CHANNEL, cmds, NULL, 5);
 	usleep(5000);
 }
@@ -345,7 +345,7 @@ void timerHandler() {
 	} else {
 		pwm1 = 0;
 		pwm3 = 0;
-		drawRectangle(0, 0, OLEDRGB_WIDTH -1, 32, 0x0000, 1, 0x0000);
+		OLEDrgb_Clear(0, 0, OLEDRGB_WIDTH - 1, 32);
 	}
 	if(flag2) {
 		pwm2 += 25;
@@ -356,7 +356,7 @@ void timerHandler() {
 	} else {
 		pwm2 = 0;
 		pwm4 = 0;
-		drawRectangle(0, 32, OLEDRGB_WIDTH -1, OLEDRGB_HEIGHT - 1, 0x0000, 1, 0x0000);
+		OLEDrgb_Clear(0, 32, OLEDRGB_WIDTH -1, OLEDRGB_HEIGHT - 1);
 	}
 
 	ArtyPWMSetDuty(4, pwm1);
