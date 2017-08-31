@@ -1,0 +1,33 @@
+From 8240325dc0d51056af6e614b686b51d5a27e55e6 Mon Sep 17 00:00:00 2001
+From: Mitchell Orsucci <mitchellorsucci@gmail.com>
+Date: Thu, 10 Aug 2017 10:32:39 -0700
+Subject: [PATCH] Addding extra debug statements to spi-xilinx.c
+
+Signed-off-by: Mitchell Orsucci <mitchellorsucci@gmail.com>
+---
+ drivers/spi/spi-xilinx.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/spi/spi-xilinx.c b/drivers/spi/spi-xilinx.c
+index 973e26f..88379ed 100644
+--- a/drivers/spi/spi-xilinx.c
++++ b/drivers/spi/spi-xilinx.c
+@@ -378,12 +378,14 @@ static int xspi_setup(struct spi_device *qspi)
+ 
+ 	if (qspi->master->busy)
+ 		return -EBUSY;
+-
++	
+ 	ret = pm_runtime_get_sync(&qspi->dev);
++	printk("after pm_runtime_get_sync: ret = %d%n", ret);
+ 	if (ret < 0)
+ 		return ret;
+ 
+ 	ret = xspi_setup_transfer(qspi, NULL);
++	printk("after xspi_setup_transfer: ret = %d\n", ret);
+ 	pm_runtime_put_sync(&qspi->dev);
+ 
+ 	return ret;
+-- 
+2.7.4
+

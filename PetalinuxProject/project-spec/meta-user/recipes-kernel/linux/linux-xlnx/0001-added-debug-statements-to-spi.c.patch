@@ -1,0 +1,37 @@
+From 50df4f0cddca7d27a6119fba8a8dccd24977186f Mon Sep 17 00:00:00 2001
+From: Mitchell Orsucci <mitchellorsucci@gmail.com>
+Date: Thu, 10 Aug 2017 11:46:27 -0700
+Subject: [PATCH] added debug statements to spi.c
+
+Signed-off-by: Mitchell Orsucci <mitchellorsucci@gmail.com>
+---
+ drivers/spi/spi.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/spi/spi.c b/drivers/spi/spi.c
+index 89cd861..2de535e 100644
+--- a/drivers/spi/spi.c
++++ b/drivers/spi/spi.c
+@@ -537,7 +537,9 @@ int spi_add_device(struct spi_device *spi)
+ 	 * using SPI_CS_HIGH can't coexist well otherwise...
+ 	 */
+ 	status = spi_setup(spi);
++	
+ 	dev_err(dev, "After spi_setup: status is: %d\n", status);
++	
+ 	if (status < 0) {
+ 		dev_err(dev, "can't setup %s, status %d\n",
+ 				dev_name(&spi->dev), status);
+@@ -1587,7 +1589,9 @@ of_register_spi_device(struct spi_master *master, struct device_node *nc)
+ 
+ 	/* Register the new device */
+ 	rc = spi_add_device(spi);
++	
+ 	dev_err(&master->dev, "after spi_add_device, rc = %d\n", rc);
++	
+ 	if (rc) {
+ 		dev_err(&master->dev, "spi_device register error %s\n",
+ 			nc->full_name);
+-- 
+2.7.4
+

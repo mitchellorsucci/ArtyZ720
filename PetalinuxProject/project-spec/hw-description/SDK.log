@@ -1,0 +1,5 @@
+15:31:28 INFO  : Registering command handlers for SDK TCF services
+15:31:34 INFO  : Launching XSCT server: xsct -n -interactive /home/mitchellorsucci/FPGA/overlay/overlay.sdk/temp_xsdb_launch_script.tcl
+15:31:37 INFO  : XSCT server has started successfully.
+15:31:37 INFO  : Successfully done setting XSCT server connection channel  
+15:31:38 INFO  : Successfully done setting SDK workspace  
