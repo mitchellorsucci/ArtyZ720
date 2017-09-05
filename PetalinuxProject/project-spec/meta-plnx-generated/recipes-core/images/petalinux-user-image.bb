@@ -42,5 +42,6 @@ IMAGE_INSTALL = "\
 		valgrind \
 		bridge-utils \
 		ArtyZ720demo \
+		scripts \
 		"
 EXTRA_USERS_PARAMS = "usermod -P root root;"
