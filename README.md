@@ -6,7 +6,7 @@ There is how to use the project on this REPO
     - a partition about 0.5GB formatted as FAT32
     - the rest of the SD card set as ext4
 2) Copy image.ub and BOOT.BIN into the FAT32 partition
-3) Copy the image of the filesystem found here - (INSERT LINK HERE) to the second partition of the sd card.
+3) Copy the image of the filesystem found here - (https://s3-us-west-2.amazonaws.com/digilent/Software/ArtyZ7/LinuxImages/ArtyZ7.ext4) using the "dd" command. Use "sudo lsblk" to discover the node of the second partition to use. The command would be "sudo dd if=ArtyZ7.ext4 of=/dev/sd****" where "****" is the specific node you are trying to write to.
 4) Connect a live Ethernet cable to the Ethernet port. This is how the ArtyZ7 will obtain an IP address and how you can access the Arty
 5) Connect a USB cable to the PROG/UART port to monitor the boot messages.
 6) Insert the microSD card into the ArtyZ720 and apply power. 7-12v is recommended.
