@@ -10,7 +10,7 @@ There is how to use the project on this REPO
 4) Connect a live Ethernet cable to the Ethernet port. This is how the ArtyZ7 will obtain an IP address and how you can access the Arty
 5) Connect a USB cable to the PROG/UART port to monitor the boot messages.
 6) Insert the microSD card into the ArtyZ720 and apply power. 7-12v is recommended.
-7) Open a console or terminal port associated with the USB/UART port to find the ip address associated with the linux OS. It will appear towards the end of the boot messages
+7) Open a console or terminal port associated with the USB/UART port to find the ip address associated with the linux OS. It will appear towards the end of the boot messages. It should be 10.16.9.65.
 8) SSH into the ArtyZ7 from a host computer. "ssh root@the_provided_ip_address". The password is "root".
 9) Type "overlay.sh load ArtyHW.dtbo"
 10) Type "overlay.sh load spichild.dtbo"
